@@ -1,3 +1,5 @@
+import './AuthTabs.scss';
+
 const AuthTabs = () => {
   return (
     <>
