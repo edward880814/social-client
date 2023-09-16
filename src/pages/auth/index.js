@@ -1,3 +1,3 @@
 import AuthTabs from '../auth/auth-tabs/AuthTabs';
-
-export { AuthTabs };
+import Login from './login/Login';
+export { AuthTabs, Login };
