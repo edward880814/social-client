@@ -1,7 +1,7 @@
 import './Register.scss';
 import Input from '../../../components/input/Input';
 import Button from '../../../components/button/Button';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Utils } from '../../../services/utils/utils.service';
 import { authService } from '../../../services/api/auth/auth.service';
 
@@ -13,14 +13,14 @@ const Register = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [alertType, setAlertType] = useState('');
   const [hasError, setHasError] = useState(false);
-  // const [user, setUser] = useState();
+  const [user, setUser] = useState();
 
   const registerUser = async (event) => {
     setLoading(true);
     event.preventDefault();
     try {
       const avatarColor = Utils.avatarColor();
-      const avatarImage = '';
+      const avatarImage = Utils.generateAvatar(username.charAt(0).toUpperCase(), avatarColor);
       const result = await authService.signUp({
         username,
         email,
@@ -33,7 +33,7 @@ const Register = () => {
       // 1 - set logged in to true in local storage
       // 2 - set username in local storage
       // 3 - dispatch user to redux
-      // setUser(result.data.user);
+      setUser(result.data.user);
       setHasError(false);
       setAlertType('alert-success');
     } catch (error) {
@@ -43,6 +43,14 @@ const Register = () => {
       setErrorMessage(error?.response?.data.message);
     }
   };
+
+  useEffect(() => {
+    if (loading && !user) return;
+    if (user) {
+      console.log('navigate to streams page');
+      setLoading(false);
+    }
+  }, [loading, user]);
 
   return (
     <div className="auth-inner">
