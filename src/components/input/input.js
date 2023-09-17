@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import './Input.scss';
 
 const Input = ({ id, name, type, value, className, labelText, placeholder, handleChange }) => {
   return (

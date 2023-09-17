@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Login } from '../index';
+import { Login, Register } from '../index';
 import './AuthTabs.scss';
 import backgroundImage from '../../../assets/images/background.jpg';
 
@@ -28,7 +28,7 @@ const AuthTabs = () => {
               )}
               {type === 'Sign Up' && (
                 <div className="tab-item">
-                  <Login />
+                  <Register />
                 </div>
               )}
             </div>

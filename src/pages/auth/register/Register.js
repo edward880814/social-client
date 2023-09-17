@@ -1,10 +1,7 @@
-import './Login.scss';
-import { FaArrowRight } from 'react-icons/fa';
+import './Register.scss';
 import Input from '../../../components/input/Input';
 import Button from '../../../components/button/Button';
-import { Link } from 'react-router-dom';
-
-const Login = () => {
+const Register = () => {
   return (
     <div className="auth-inner">
       {/* <div className="alerts alert-success" role="alert">
@@ -22,6 +19,15 @@ const Login = () => {
             handleChange={() => {}}
           />
           <Input
+            id="email"
+            name="email"
+            type="text"
+            value="test@test.com"
+            labelText="Email"
+            placeholder="Enter Email"
+            handleChange={() => {}}
+          />
+          <Input
             id="password"
             name="password"
             type="password"
@@ -30,21 +36,11 @@ const Login = () => {
             placeholder="Enter Password"
             handleChange={() => {}}
           />
-          <label className="checkmark-container" htmlFor="checkbox">
-            <Input id="checkbox" name="checkbox" type="checkbox" value={false} handleChange={() => {}} />
-            Keep me signed in
-          </label>
         </div>
-        <Button label={'SIGNIN'} className="auth-button button" disabled={true} />
-
-        <Link to={'/forgot-password'}>
-          <span className="forgot-password">
-            Forgot password? <FaArrowRight className="arrow-right" />
-          </span>
-        </Link>
+        <Button label={'SIGNUP'} className="auth-button button" disabled={true} />
       </form>
     </div>
   );
 };
 
-export default Login;
+export default Register;

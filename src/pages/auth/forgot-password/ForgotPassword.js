@@ -1,10 +1,10 @@
-import './Login.scss';
-import { FaArrowRight } from 'react-icons/fa';
+import './ForgotPassword.scss';
+import { FaArrowLeft } from 'react-icons/fa';
 import Input from '../../../components/input/Input';
 import Button from '../../../components/button/Button';
 import { Link } from 'react-router-dom';
 
-const Login = () => {
+const ForgotPassword = () => {
   return (
     <div className="auth-inner">
       {/* <div className="alerts alert-success" role="alert">
@@ -12,15 +12,6 @@ const Login = () => {
       </div> */}
       <form className="auth-form">
         <div className="form-input-container">
-          <Input
-            id="username"
-            name="username"
-            type="text"
-            value="my value"
-            labelText="Username"
-            placeholder="Enter Username"
-            handleChange={() => {}}
-          />
           <Input
             id="password"
             name="password"
@@ -30,16 +21,13 @@ const Login = () => {
             placeholder="Enter Password"
             handleChange={() => {}}
           />
-          <label className="checkmark-container" htmlFor="checkbox">
-            <Input id="checkbox" name="checkbox" type="checkbox" value={false} handleChange={() => {}} />
-            Keep me signed in
-          </label>
         </div>
         <Button label={'SIGNIN'} className="auth-button button" disabled={true} />
 
-        <Link to={'/forgot-password'}>
+        <Link to={'/'}>
           <span className="forgot-password">
-            Forgot password? <FaArrowRight className="arrow-right" />
+            <FaArrowLeft className="arrow-left" />
+            Back to Login
           </span>
         </Link>
       </form>
@@ -47,4 +35,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default ForgotPassword;
