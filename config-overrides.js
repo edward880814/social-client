@@ -8,7 +8,7 @@ const aliasMap = {
   '@mocks': 'src/mocks',
   '@assets': 'src/assets',
   '@colors': 'src/colors',
-  '@redux': 'src/redux-toolkit',
+  '@redux': 'src/redux',
   '@root': 'src'
 };
 
