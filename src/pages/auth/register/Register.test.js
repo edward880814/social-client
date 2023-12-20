@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import useLocalStorage from '@hooks/useLocalStorage';
 import useSessionStorage from '@hooks/useSessionStorage';
 import { useDispatch } from 'react-redux';
+
 const Register = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
@@ -22,6 +23,7 @@ const Register = () => {
   const [pageReload] = useSessionStorage('pageReload', 'set');
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const registerUser = async (event) => {
     setLoading(true);
     event.preventDefault();
@@ -51,6 +53,7 @@ const Register = () => {
     if (loading && !user) return;
     if (user) navigate('/app/social/streams');
   }, [loading, user, navigate]);
+
   return (
     <div className="auth-inner">
       {hasError && errorMessage && (
@@ -100,4 +103,5 @@ const Register = () => {
     </div>
   );
 };
+
 export default Register;
