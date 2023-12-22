@@ -1,9 +1,19 @@
 import Avatar from '@components/avatar/Avatar';
 import Button from '@components/button/Button';
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 
 import '@components/suggestions/Suggestions.scss';
 
 const Suggestions = () => {
+  // @ts-ignore
+  const { suggestions } = useSelector((state) => state);
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    setUsers(suggestions?.users);
+  }, [suggestions, users]);
+
   return (
     <div className="suggestions-list-container" data-testid="suggestions-container">
       <div className="suggestions-header">
@@ -12,7 +22,7 @@ const Suggestions = () => {
       <hr />
       <div className="suggestions-container">
         <div className="suggestions">
-          {[]?.map((user, index) => (
+          {users?.map((user, index) => (
             <div data-testid="suggestions-item" className="suggestions-item" key={index}>
               <Avatar
                 name={user?.username}
@@ -28,7 +38,7 @@ const Suggestions = () => {
             </div>
           ))}
         </div>
-        <div className="view-more">View More</div>
+        {users.length > 8 && <div className="view-more">View More</div>}
       </div>
     </div>
   );

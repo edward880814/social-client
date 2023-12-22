@@ -1,18 +1,19 @@
-import { useRef, useEffect } from 'react';
+import { useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import '@pages/social/streams/Streams.scss';
 import Suggestions from '@components/suggestions/Suggestions';
 import { getUserSuggestions } from '@redux/api/suggestion';
+import useEffectOnce from '@hooks/useEffectOnce';
 
 const Streams = () => {
   const bodyRef = useRef(null);
   const bottomLineRef = useRef();
   const dispatch = useDispatch();
 
-  useEffect(() => {
+  useEffectOnce(() => {
     // @ts-ignore
     dispatch(getUserSuggestions());
-  }, [dispatch]);
+  });
 
   return (
     <div className="streams" data-testid="streams">
