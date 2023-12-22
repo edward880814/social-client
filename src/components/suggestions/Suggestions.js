@@ -1,14 +1,16 @@
+// @ts-nocheck
 import Avatar from '@components/avatar/Avatar';
 import Button from '@components/button/Button';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 import '@components/suggestions/Suggestions.scss';
 
 const Suggestions = () => {
-  // @ts-ignore
   const { suggestions } = useSelector((state) => state);
   const [users, setUsers] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setUsers(suggestions?.users);
@@ -38,7 +40,11 @@ const Suggestions = () => {
             </div>
           ))}
         </div>
-        {users.length > 8 && <div className="view-more">View More</div>}
+        {users.length > 8 && (
+          <div className="view-more" onClick={() => navigate('/app/social/people')}>
+            View More
+          </div>
+        )}
       </div>
     </div>
   );
