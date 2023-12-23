@@ -1,3 +1,4 @@
+import ProtectedRoute from '@pages/ProtectedRoutes';
 import { AuthTabs, ForgotPassword, ResetPassword } from '@pages/auth';
 import Social from '@pages/social/Social';
 import Chat from '@pages/social/chat/Chat';
@@ -27,7 +28,11 @@ export const AppRouter = () => {
     },
     {
       path: '/app/social',
-      element: <Social />,
+      element: (
+        <ProtectedRoute>
+          <Social />
+        </ProtectedRoute>
+      ),
       children: [
         {
           path: 'streams',
