@@ -7,11 +7,14 @@ import '@components/header/Header.scss';
 import Avatar from '@components/avatar/Avatar';
 import { Utils } from '@services/utils/utils.service';
 import MessageSidebar from '@components/message-sidebar/MessageSidebar';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import useDetectOutsideClick from '@hooks/useDetectOutsideClick';
 import Dropdown from '@components/dropdown/Dropdown';
 import { ProfileUtils } from '@services/utils/profile-utils.service';
 import { useNavigate } from 'react-router-dom';
+import useLocalStorage from '@hooks/useLocalStorage';
+import useSessionStorage from '@hooks/useSessionStorage';
+import { userService } from '@services/api/user/user.service';
 const Header = () => {
   const { profile } = useSelector((state) => state.user);
   const [environment, setEnvironment] = useState('');
@@ -20,16 +23,29 @@ const Header = () => {
   const notificationRef = useRef(null);
   const settingsRef = useRef(null);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [isMessageActive, setIsMessageActive] = useDetectOutsideClick(messageRef, false);
   const [isNotificationActive, setIsNotificationActive] = useDetectOutsideClick(notificationRef, false);
   const [isSettingsActive, setIsSettingsActive] = useDetectOutsideClick(settingsRef, false);
+  const [deleteStorageUsername] = useLocalStorage('username', 'delete');
+  const [setLoggedIn] = useLocalStorage('keepLoggedIn', 'set');
+  const [deleteSessionPageReload] = useSessionStorage('pageReload', 'delete');
 
   const backgrounColor = `${environment === 'DEV' ? '#50b5ff' : environment === 'STG' ? '#e9710f' : ''}`;
 
   const openChatPage = () => {};
   const onMarkAsRead = () => {};
   const onDeleteNotification = () => {};
-  const onLogout = () => {};
+  const onLogout = async () => {
+    try {
+      setLoggedIn(false);
+      Utils.clearStore({ dispatch, deleteStorageUsername, deleteSessionPageReload, setLoggedIn });
+      await userService.logoutUser();
+      navigate('/');
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffectOnce(() => {
     Utils.mapSettingsDropdownItems(setSettings);
