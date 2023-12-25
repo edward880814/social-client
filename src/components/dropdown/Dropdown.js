@@ -35,43 +35,42 @@ const Dropdown = ({
               className="social-card-body-info-container"
               style={{ maxHeight: `${height}px` }}
             >
-              {Array.isArray(data) &&
-                data.map((item, index) => (
-                  <div className="social-sub-card" key={index}>
-                    <div className="content-avatar">
-                      {title === 'Notifications' ? (
-                        <Avatar
-                          name={item?.username}
-                          bgColor={item?.avatarColor}
-                          textColor="#ffffff"
-                          size={40}
-                          avatarSrc={item?.profilePicture}
-                        />
-                      ) : (
-                        <FaUserAlt className="userIcon" />
-                      )}
-                    </div>
-                    <div
-                      className="content-body"
-                      onClick={() => {
-                        if (title === 'Notifications') {
-                          onMarkAsRead(item);
-                        } else {
-                          onNavigate();
-                        }
-                      }}
-                    >
-                      <h6 className="title">{item?.topText}</h6>
-                      <p className="subtext">{item?.subText}</p>
-                    </div>
-                    {title === 'Notifications' && (
-                      <div className="content-icons">
-                        <FaTrashAlt className="trash" onClick={() => onDeleteNotification(item?._id)} />
-                        {item?.read ? <FaRegCircle className="circle" /> : <FaCircle className="circle" />}
-                      </div>
+              {data.map((item, index) => (
+                <div className="social-sub-card" key={index}>
+                  <div className="content-avatar">
+                    {title === 'Notifications' ? (
+                      <Avatar
+                        name={item?.username}
+                        bgColor={item?.avatarColor}
+                        textColor="#ffffff"
+                        size={40}
+                        avatarSrc={item?.profilePicture}
+                      />
+                    ) : (
+                      <FaUserAlt className="userIcon" />
                     )}
                   </div>
-                ))}
+                  <div
+                    className="content-body"
+                    onClick={() => {
+                      if (title === 'Notifications') {
+                        onMarkAsRead(item);
+                      } else {
+                        onNavigate();
+                      }
+                    }}
+                  >
+                    <h6 className="title">{item?.topText}</h6>
+                    <p className="subtext">{item?.subText}</p>
+                  </div>
+                  {title === 'Notifications' && (
+                    <div className="content-icons">
+                      <FaTrashAlt className="trash" onClick={() => onDeleteNotification(item?._id)} />
+                      {item?.read ? <FaRegCircle className="circle" /> : <FaCircle className="circle" />}
+                    </div>
+                  )}
+                </div>
+              ))}
             </div>
 
             {title === 'Settings' && (

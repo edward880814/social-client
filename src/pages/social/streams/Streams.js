@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import '@pages/social/streams/Streams.scss';
@@ -11,7 +12,6 @@ const Streams = () => {
   const dispatch = useDispatch();
 
   useEffectOnce(() => {
-    // @ts-ignore
     dispatch(getUserSuggestions());
   });
 
@@ -30,4 +30,5 @@ const Streams = () => {
     </div>
   );
 };
+
 export default Streams;

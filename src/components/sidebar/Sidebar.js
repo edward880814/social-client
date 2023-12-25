@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { useEffect, useState } from 'react';
 import { sideBarItems, fontAwesomeIcons } from '@services/utils/static.data';
 import { useLocation, createSearchParams, useNavigate } from 'react-router-dom';
@@ -5,7 +6,6 @@ import '@components//sidebar/Sidebar.scss';
 import { useSelector } from 'react-redux';
 
 const Sidebar = () => {
-  // @ts-ignore
   const { profile } = useSelector((state) => state.user);
   const [sidebar, setSideBar] = useState([]);
   const location = useLocation();
