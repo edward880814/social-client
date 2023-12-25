@@ -3,8 +3,6 @@ import { useEffect, useCallback, useRef, useState } from 'react';
 import { cloneDeep } from 'lodash';
 
 import '@components/toast/Toast.scss';
-import { Utils } from '@services/utils/utils.service';
-import { useDispatch } from 'react-redux';
 
 const Toast = (props) => {
   const { toastList, position, autoDelete, autoDeleteTime = 2000 } = props;
