@@ -1,7 +1,8 @@
+import { notificationService } from '@services/api/notifications/notification.service';
 import { socketService } from '@services/socket/socket.service';
 import { cloneDeep, find, findIndex, remove } from 'lodash';
-
-export class NotificaationUtils {
+import { Utils } from '@services/utils/utils.service';
+export class NotificationUtils {
   static socketIONotification(profile, notifications, setNotifications, type, setNotificationsCount) {
     socketService?.socket?.on('insert notification', (data, userToData) => {
       if (profile?._id === userToData.userTo) {
@@ -50,5 +51,24 @@ export class NotificaationUtils {
         setNotifications(mappedNotifications);
       }
     });
+  }
+
+  static async markMessageAsRead(messageId, notification, setNotificationDialogContent) {
+    if (notification.notificationType !== 'follows') {
+      const notificationDialog = {
+        createdAt: notification?.createdAt,
+        post: notification?.post,
+        imgUrl: notification?.imgId
+          ? Utils.appImageUrl(notification?.imgVersion, notification?.imgId)
+          : notification?.gifUrl
+          ? notification?.gifUrl
+          : notification?.imgUrl,
+        comment: notification?.comment,
+        reaction: notification?.reaction,
+        senderName: notification?.userFrom ? notification?.userFrom.username : notification?.username
+      };
+      setNotificationDialogContent(notificationDialog);
+    }
+    await notificationService.markNotificationAsRead(messageId);
   }
 }
