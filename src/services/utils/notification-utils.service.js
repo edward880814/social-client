@@ -1,7 +1,8 @@
 import { notificationService } from '@services/api/notifications/notification.service';
 import { socketService } from '@services/socket/socket.service';
-import { cloneDeep, find, findIndex, remove } from 'lodash';
+import { cloneDeep, find, findIndex, remove, sumBy } from 'lodash';
 import { Utils } from '@services/utils/utils.service';
+import { timeAgo } from '@services/utils/timeago.utils';
 export class NotificationUtils {
   static socketIONotification(profile, notifications, setNotifications, type, setNotificationsCount) {
     socketService?.socket?.on('insert notification', (data, userToData) => {
@@ -85,7 +86,6 @@ export class NotificationUtils {
     setNotificationsCount(count);
     return items;
   }
-
 
   static async markMessageAsRead(messageId, notification, setNotificationDialogContent) {
     if (notification.notificationType !== 'follows') {
