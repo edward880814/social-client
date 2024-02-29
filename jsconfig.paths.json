@@ -1,8 +1,6 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
-    "jsx": "preserve",
-    "checkJs": true,
     "paths": {
       "@components/*": ["src/components/*"],
       "@services/*": ["src/services/*"],
