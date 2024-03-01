@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { AppRouter } from '@root/routes';
 import { BrowserRouter } from 'react-router-dom';
 import { useEffect } from 'react';

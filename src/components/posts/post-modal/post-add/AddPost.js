@@ -1,4 +1,3 @@
-// @ts-nocheck
 import PostWrapper from '@components/posts/modal-wrappers/post-wrapper/PostWrapper';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';

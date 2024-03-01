@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import '@pages/social/streams/Streams.scss';

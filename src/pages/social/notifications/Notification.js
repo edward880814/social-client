@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { useState, useEffect } from 'react';
 import Avatar from '@components/avatar/Avatar';
 import '@pages/social/notifications/Notification.scss';

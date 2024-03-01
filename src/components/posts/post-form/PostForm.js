@@ -1,4 +1,3 @@
-// @ts-nocheck
 import Avatar from '@components/avatar/Avatar';
 import Input from '@components/input/Input';
 import { useDispatch, useSelector } from 'react-redux';

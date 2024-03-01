@@ -1,4 +1,3 @@
-// @ts-nocheck
 import useEffectOnce from '@hooks/useEffectOnce';
 import useLocalStorage from '@hooks/useLocalStorage';
 import useSessionStorage from '@hooks/useSessionStorage';
