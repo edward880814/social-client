@@ -8,6 +8,7 @@ import { PostUtils } from '@services/utils/post-utils.service';
 import { FaTimes } from 'react-icons/fa';
 import { bgColors } from '@services/utils/static.data';
 import ModalBoxSelection from '@components/posts/post-modal/modal-box-content/ModalBoxSelection';
+
 const AddPost = () => {
   const { gifModalIsOpen } = useSelector((state) => state.modal);
   const [loading] = useState(false);
@@ -25,8 +26,10 @@ const AddPost = () => {
     video: ''
   });
   const [disable, setDisable] = useState(false);
+  const [selectedPostItem, setSelectedPostImage] = useState();
 
   const selectBackground = (bgColor) => {
+    console.log(selectedPostItem);
     PostUtils.selectBackground(bgColor, postData, setTextAreaBackground, setPostData, setDisable);
   };
 
@@ -107,7 +110,7 @@ const AddPost = () => {
               {allowedNumberOfCharacters}
             </span>
 
-            <ModalBoxSelection />
+            <ModalBoxSelection setSelectedPostImage={setSelectedPostImage} />
 
             <div className="modal-box-button" data-testid="post-button">
               <Button label="Create Post" className="post-button" disabled={disable} />
