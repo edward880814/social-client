@@ -3,11 +3,13 @@ import { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import '@components/posts/post-modal/post-add/AddPost.scss';
 import ModalBoxContent from '@components/posts/post-modal/modal-box-content/ModalBoxContent';
-import Button from '@components/button/Button';
-import { PostUtils } from '@services/utils/post-utils.service';
-import { FaTimes } from 'react-icons/fa';
+import { FaArrowLeft, FaTimes } from 'react-icons/fa';
 import { bgColors } from '@services/utils/static.data';
 import ModalBoxSelection from '@components/posts/post-modal/modal-box-content/ModalBoxSelection';
+import Button from '@components/button/Button';
+import { PostUtils } from '@services/utils/post-utils.service';
+import { toggleGifModal } from '@redux/reducers/modal/modal.reducer';
+import Giphy from '@components/giphy/Giphy';
 
 const AddPost = () => {
   const { gifModalIsOpen } = useSelector((state) => state.modal);
@@ -170,7 +172,21 @@ const AddPost = () => {
             </div>
           </div>
         )}
-        {gifModalIsOpen && <div>Gif</div>}
+        {gifModalIsOpen && (
+          <div className="modal-giphy" data-testid="modal-giphy">
+            <div className="modal-giphy-header">
+              <Button
+                label={<FaArrowLeft />}
+                className="back-button"
+                disabled={false}
+                handleClick={() => dispatch(toggleGifModal(!gifModalIsOpen))}
+              />
+              <h2>Choose a GIF</h2>
+            </div>
+            <hr />
+            <Giphy />
+          </div>
+        )}
       </PostWrapper>
     </>
   );
