@@ -10,8 +10,9 @@ import Button from '@components/button/Button';
 import { PostUtils } from '@services/utils/post-utils.service';
 import { toggleGifModal } from '@redux/reducers/modal/modal.reducer';
 import Giphy from '@components/giphy/Giphy';
+import PropTypes from 'prop-types';
 
-const AddPost = () => {
+const AddPost = ({ selectedImage }) => {
   const { gifModalIsOpen } = useSelector((state) => state.modal);
   const { gifUrl, image } = useSelector((state) => state.post);
   const [loading] = useState(false);
@@ -39,6 +40,7 @@ const AddPost = () => {
 
   const selectBackground = (bgColor) => {
     console.log(selectedPostItem);
+    console.log(selectedImage);
     PostUtils.selectBackground(bgColor, postData, setTextAreaBackground, setPostData, setDisable);
   };
 
@@ -191,5 +193,7 @@ const AddPost = () => {
     </>
   );
 };
-
+AddPost.propTypes = {
+  selectedImage: PropTypes.string
+};
 export default AddPost;
