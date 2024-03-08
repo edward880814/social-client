@@ -12,7 +12,7 @@ const Posts = ({ allPosts, userFollowing, postsLoading }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    console.log(following, loading, profile)
+    console.log(following, loading, profile);
     setPosts(allPosts);
     setFollowing(userFollowing);
     setLoading(postsLoading);
