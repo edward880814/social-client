@@ -2,7 +2,6 @@ import { closeModal } from '@redux/reducers/modal/modal.reducer';
 import { clearPost, updatePostItem } from '@redux/reducers/post/post.reducer';
 import { postService } from '@services/api/post/post.service';
 import { Utils } from '@services/utils/utils.service';
-
 export class PostUtils {
   static selectBackground(bgColor, postData, setTextAreaBackground, setPostData, setDisable) {
     postData.bgColor = bgColor;
@@ -90,5 +89,13 @@ export class PostUtils {
         dispatch
       );
     }
+  }
+
+  static checkPrivacy(post, profile, following) {
+    const isPrivate = post?.privacy === 'Private' && post?.userId === profile?._id;
+    const isPublic = post?.privacy === 'Public';
+    const isFollower =
+      post?.privacy === 'Followers' && Utils.checkIfUserIsFollowed(following, post?.userId, profile?._id);
+    return isPrivate || isPublic || isFollower;
   }
 }
