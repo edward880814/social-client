@@ -1,9 +1,7 @@
 import { addNotification, clearNotification } from '@redux/reducers/notifications/notification.reducer';
 import { addUser, clearUser } from '@redux/reducers/user/user.reducer';
-import { APP_ENVIRONMENT } from '@services/axios';
 import { avatarColors } from '@services/utils/static.data';
-import { floor, random, some, findIndex } from 'lodash';
-import millify from 'millify';
+import { floor, random, some } from 'lodash';
 
 export class Utils {
   static avatarColor() {
@@ -53,11 +51,10 @@ export class Utils {
   }
 
   static appEnvironment() {
-    if (APP_ENVIRONMENT === 'local') {
-      return 'LOCAL';
-    } else if (APP_ENVIRONMENT === 'development') {
+    const env = process.env.REACT_APP_ENVIRONMENT;
+    if (env === 'development') {
       return 'DEV';
-    } else if (APP_ENVIRONMENT === 'staging') {
+    } else if (env === 'staging') {
       return 'STG';
     }
   }
@@ -97,63 +94,5 @@ export class Utils {
 
   static checkIfUserIsFollowed(userFollowers, postCreatorId, userId) {
     return some(userFollowers, (user) => user._id === postCreatorId || postCreatorId === userId);
-  }
-
-  static checkIfUserIsOnline(username, onlineUsers) {
-    return some(onlineUsers, (user) => user === username?.toLowerCase());
-  }
-
-  static firstLetterUpperCase(word) {
-    if (!word) return '';
-    return `${word.charAt(0).toUpperCase()}${word.slice(1)}`;
-  }
-
-  static formattedReactions(reactions) {
-    const postReactions = [];
-    for (const [key, value] of Object.entries(reactions)) {
-      if (value > 0) {
-        const reactionObject = {
-          type: key,
-          value
-        };
-        postReactions.push(reactionObject);
-      }
-    }
-    return postReactions;
-  }
-
-  static shortenLargeNumbers(data) {
-    if (data === undefined) {
-      return 0;
-    } else {
-      return millify(data);
-    }
-  }
-
-  static getImage(imageId, imageVersion) {
-    return imageId && imageVersion ? this.appImageUrl(imageVersion, imageId) : '';
-  }
-
-  static getVideo(videoId, videoVersion) {
-    return videoId && videoVersion
-      ? `https://res.cloudinary.com/dyamr9ym3/video/upload/v${videoVersion}/${videoId}`
-      : '';
-  }
-
-  static removeUserFromList(list, userId) {
-    const index = findIndex(list, (id) => id === userId);
-    list.splice(index, 1);
-    return list;
-  }
-
-  static checkUrl(url, word) {
-    return url.includes(word);
-  }
-
-  static renameFile(element) {
-    const fileName = element.name.split('.').slice(0, -1).join('.');
-    const blob = element.slice(0, element.size, '/image/png');
-    const newFile = new File([blob], `${fileName}.png`, { type: '/image/png' });
-    return newFile;
   }
 }
