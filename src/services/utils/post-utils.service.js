@@ -3,17 +3,15 @@ import { clearPost, updatePostItem } from '@redux/reducers/post/post.reducer';
 import { postService } from '@services/api/post/post.service';
 import { Utils } from '@services/utils/utils.service';
 export class PostUtils {
-  static selectBackground(bgColor, postData, setTextAreaBackground, setPostData, setDisable) {
+  static selectBackground(bgColor, postData, setTextAreaBackground, setPostData) {
     postData.bgColor = bgColor;
     setTextAreaBackground(bgColor);
     setPostData(postData);
-    setDisable(false);
   }
 
-  static postInputEditable(textContent, postData, setPostData, setDisable) {
+  static postInputEditable(textContent, postData, setPostData) {
     postData.post = textContent;
     setPostData(postData);
-    setDisable(false);
   }
 
   static closePostModal(dispatch) {
@@ -21,7 +19,7 @@ export class PostUtils {
     dispatch(clearPost());
   }
 
-  static clearImage(postData, post, inputRef, dispatch, setSelectedPostImage, setPostImage, setPostData, setDisable) {
+  static clearImage(postData, post, inputRef, dispatch, setSelectedPostImage, setPostImage, setPostData) {
     postData.gifUrl = '';
     postData.image = '';
     postData.video = '';
