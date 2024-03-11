@@ -33,10 +33,9 @@ export class PostUtils {
         }
         setPostData(postData);
       }
+      PostUtils.positionCursor('editable');
     });
-    dispatch(
-      updatePostItem({ gifUrl: '', image: '', imgId: '', imgVersion: '', video: '', videoId: '', videoVersion: '' })
-    );
+    dispatch(updatePostItem({ gifUrl: '', image: '', imgId: '', imgVersion: '' }));
   }
 
   static postInputData(imageInputRef, postData, post, setPostData) {
@@ -47,6 +46,7 @@ export class PostUtils {
           postData.post = post;
         }
         setPostData(postData);
+        PostUtils.positionCursor('editable');
       }
     });
   }
@@ -95,5 +95,16 @@ export class PostUtils {
     const isFollower =
       post?.privacy === 'Followers' && Utils.checkIfUserIsFollowed(following, post?.userId, profile?._id);
     return isPrivate || isPublic || isFollower;
+  }
+
+  static positionCursor(elementId) {
+    const element = document.getElementById(`${elementId}`);
+    const selection = window.getSelection();
+    const range = document.createRange();
+    selection.removeAllRanges();
+    range.selectNodeContents(element);
+    range.collapse(false);
+    selection.addRange(range);
+    element.focus();
   }
 }

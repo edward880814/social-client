@@ -121,6 +121,10 @@ const AddPost = ({ selectedImage }) => {
   };
 
   useEffect(() => {
+    PostUtils.positionCursor('editable');
+  }, []);
+
+  useEffect(() => {
     if (!loading && apiResponse === 'success') {
       dispatch(closeModal());
     }
@@ -174,12 +178,15 @@ const AddPost = ({ selectedImage }) => {
                     <div className="flex-row">
                       <div
                         data-testid="editable"
+                        id="editable"
                         name="post"
                         ref={(el) => {
                           inputRef.current = el;
                           inputRef?.current?.focus();
                         }}
-                        className={`editable flex-item ${textAreaBackground !== '#ffffff' ? 'textInputColor' : ''}`}
+                        className={`editable flex-item ${textAreaBackground !== '#ffffff' ? 'textInputColor' : ''} ${
+                          postData.post.length === 0 && textAreaBackground !== '#ffffff' ? 'defaultInputTextColor' : ''
+                        }`}
                         contentEditable={true}
                         onInput={(e) => postInputEditable(e, e.currentTarget.textContent)}
                         onKeyDown={onKeyDown}
@@ -197,6 +204,7 @@ const AddPost = ({ selectedImage }) => {
                   <div
                     data-testid="post-editable"
                     name="post"
+                    id="editable"
                     ref={(el) => {
                       imageInputRef.current = el;
                       imageInputRef?.current?.focus();
@@ -225,7 +233,10 @@ const AddPost = ({ selectedImage }) => {
                     key={index}
                     className={`${color === '#ffffff' ? 'whiteColorBorder' : ''}`}
                     style={{ backgroundColor: `${color}` }}
-                    onClick={() => selectBackground(color)}
+                    onClick={() => {
+                      PostUtils.positionCursor('editable');
+                      selectBackground(color);
+                    }}
                   ></li>
                 ))}
               </ul>
