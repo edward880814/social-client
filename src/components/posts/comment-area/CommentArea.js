@@ -6,11 +6,11 @@ import { useCallback, useEffect, useState } from 'react';
 import { find } from 'lodash';
 import { Utils } from '@services/utils/utils.service';
 import { reactionsMap } from '@services/utils/static.data';
+import { useSelector } from 'react-redux';
 
 const CommentArea = ({ post }) => {
+  const { reactions } = useSelector((state) => state.userPostReactions);
   const [userSelectedReaction, setUserSelectedReaction] = useState('');
-
-  const reactions = [];
 
   const selectedUserReaction = useCallback(
     (postReactions) => {
