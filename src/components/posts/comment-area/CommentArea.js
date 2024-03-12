@@ -1,15 +1,15 @@
 import PropTypes from 'prop-types';
 import { FaRegCommentAlt } from 'react-icons/fa';
 import '@components/posts/comment-area/CommentArea.scss';
-import Reactions from '../reactions/Reactions';
+import Reactions from '@components/posts/reactions/Reactions';
 import { useCallback, useEffect, useState } from 'react';
 import { cloneDeep, filter, find } from 'lodash';
 import { Utils } from '@services/utils/utils.service';
 import { reactionsMap } from '@services/utils/static.data';
 import { useDispatch, useSelector } from 'react-redux';
 import { postService } from '@services/api/post/post.service';
-import { socketService } from '@services/socket/socket.service';
 import { addReactions } from '@redux/reducers/post/user-post-reaction.reducer';
+import { socketService } from '@services/socket/socket.service';
 
 const CommentArea = ({ post }) => {
   const { profile } = useSelector((state) => state.user);
@@ -123,13 +123,9 @@ const CommentArea = ({ post }) => {
     socketService?.socket?.emit('reaction', socketReactionData);
   };
 
-  useEffect(
-    () => {
-      selectedUserReaction();
-    },
-    [selectedUserReaction],
-    reactions
-  );
+  useEffect(() => {
+    selectedUserReaction(reactions);
+  }, [selectedUserReaction, reactions]);
 
   return (
     <div className="comment-area" data-testid="comment-area">
@@ -137,7 +133,10 @@ const CommentArea = ({ post }) => {
         <div className="likes-block" onClick={() => addReactionPost('like')}>
           <div className={`likes-block-icons reaction-icon ${userSelectedReaction.toLowerCase()}`}>
             {userSelectedReaction && (
-              <div className={`reaction-display ${userSelectedReaction.toLowerCase()}`} data-testid="selected-reaction">
+              <div
+                className={`reaction-display ${userSelectedReaction.toLowerCase()} `}
+                data-testid="selected-reaction"
+              >
                 <img className="reaction-img" src={reactionsMap[userSelectedReaction.toLowerCase()]} alt="" />
                 <span>{userSelectedReaction}</span>
               </div>
