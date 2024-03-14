@@ -4,6 +4,7 @@ import { postService } from '@services/api/post/post.service';
 import { socketService } from '@services/socket/socket.service';
 import { Utils } from '@services/utils/utils.service';
 import { cloneDeep, find, findIndex, remove } from 'lodash';
+
 export class PostUtils {
   static selectBackground(bgColor, postData, setTextAreaBackground, setPostData) {
     postData.bgColor = bgColor;
@@ -37,7 +38,9 @@ export class PostUtils {
       }
       PostUtils.positionCursor('editable');
     });
-    dispatch(updatePostItem({ gifUrl: '', image: '', imgId: '', imgVersion: '' }));
+    dispatch(
+      updatePostItem({ gifUrl: '', image: '', imgId: '', imgVersion: '', video: '', videoId: '', videoVersion: '' })
+    );
   }
 
   static postInputData(imageInputRef, postData, post, setPostData) {
@@ -53,41 +56,58 @@ export class PostUtils {
     });
   }
 
-  static dispatchNotification(message, type, setApiResponse, setLoading, setDisable, dispatch) {
+  static dispatchNotification(message, type, setApiResponse, setLoading, dispatch) {
     setApiResponse(type);
     setLoading(false);
-    setDisable(false);
     Utils.dispatchNotification(message, type, dispatch);
   }
 
-  static async sendPostWithImageRequest(
-    fileResult,
-    postData,
-    imageInputRef,
-    setApiResponse,
-    setLoading,
-    setDisable,
-    dispatch
-  ) {
+  static async sendPostWithFileRequest(type, postData, imageInputRef, setApiResponse, setLoading, dispatch) {
     try {
-      postData.image = fileResult;
-      if (!imageInputRef?.current) {
+      if (imageInputRef?.current) {
         imageInputRef.current.textContent = postData.post;
       }
-      const response = await postService.createPostWithImage(postData);
+      const response =
+        type === 'image'
+          ? await postService.createPostWithImage(postData)
+          : await postService.createPostWithVideo(postData);
       if (response) {
         setApiResponse('success');
         setLoading(false);
       }
     } catch (error) {
-      PostUtils.dispatchNotification(
-        error.response.data.message,
-        'error',
-        setApiResponse,
-        setLoading,
-        setDisable,
-        dispatch
-      );
+      PostUtils.dispatchNotification(error.response.data.message, 'error', setApiResponse, setLoading, dispatch);
+    }
+  }
+
+  static async sendUpdatePostWithFileRequest(type, postId, postData, setApiResponse, setLoading, dispatch) {
+    try {
+      const response =
+        type === 'image'
+          ? await postService.updatePostWithImage(postId, postData)
+          : await postService.updatePostWithVideo(postId, postData);
+      if (response) {
+        PostUtils.dispatchNotification(response.data.message, 'success', setApiResponse, setLoading, dispatch);
+        setTimeout(() => {
+          setApiResponse('success');
+          setLoading(false);
+        }, 3000);
+        PostUtils.closePostModal(dispatch);
+      }
+    } catch (error) {
+      PostUtils.dispatchNotification(error.response.data.message, 'error', setApiResponse, setLoading, dispatch);
+    }
+  }
+
+  static async sendUpdatePostRequest(postId, postData, setApiResponse, setLoading, dispatch) {
+    const response = await postService.updatePost(postId, postData);
+    if (response) {
+      PostUtils.dispatchNotification(response.data.message, 'success', setApiResponse, setLoading, dispatch);
+      setTimeout(() => {
+        setApiResponse('success');
+        setLoading(false);
+      }, 3000);
+      PostUtils.closePostModal(dispatch);
     }
   }
 

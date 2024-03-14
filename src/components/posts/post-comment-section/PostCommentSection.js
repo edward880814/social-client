@@ -1,6 +1,6 @@
 import CommentArea from '@components/posts/comment-area/CommentArea';
+import ReactionsAndCommentsDisplay from '@components/posts/reactions/reactions-and-comments-display/ReactionsAndCommentsDisplay';
 import PropTypes from 'prop-types';
-import ReactionsAndCommentsDisplay from '../reactions/reactions-and-comments-display/ReactionsAndCommentsDisplay';
 
 const PostCommentSection = ({ post }) => {
   return (

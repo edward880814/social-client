@@ -1,11 +1,11 @@
 import Avatar from '@components/avatar/Avatar';
-import { feelingsList, privacyList } from '@services/utils/static.data';
 import { timeAgo } from '@services/utils/timeago.utils';
-import { find } from 'lodash';
 import PropTypes from 'prop-types';
 import { FaPencilAlt, FaRegTrashAlt } from 'react-icons/fa';
+import { find } from 'lodash';
+import { feelingsList, privacyList } from '@services/utils/static.data';
 import '@components/posts/post/Post.scss';
-import PostCommentSection from '../post-comment-section/PostCommentSection';
+import PostCommentSection from '@components/posts/post-comment-section/PostCommentSection';
 
 const Post = ({ post, showIcons }) => {
   const getFeeling = (name) => {
@@ -15,7 +15,7 @@ const Post = ({ post, showIcons }) => {
 
   const getPrivacy = (type) => {
     const privacy = find(privacyList, (data) => data.topText === type);
-    return privacy?.name;
+    return privacy?.icon;
   };
 
   return (
@@ -94,10 +94,8 @@ const Post = ({ post, showIcons }) => {
     </>
   );
 };
-
 Post.propTypes = {
   post: PropTypes.object.isRequired,
   showIcons: PropTypes.bool
 };
-
 export default Post;
