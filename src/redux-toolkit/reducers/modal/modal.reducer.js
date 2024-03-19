@@ -14,7 +14,6 @@ const initialState = {
   deleteDialogIsOpen: false
 };
 
-// @ts-ignore
 const modalSlice = createSlice({
   name: 'modal',
   initialState,
