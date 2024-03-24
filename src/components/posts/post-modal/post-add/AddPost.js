@@ -14,6 +14,7 @@ import PropTypes from 'prop-types';
 import { ImageUtils } from '@services/utils/image-utils.service';
 import { postService } from '@services/api/post/post.service';
 import Spinner from '@components/spinner/Spinner';
+
 const AddPost = ({ selectedImage }) => {
   const { gifModalIsOpen, feeling } = useSelector((state) => state.modal);
   const { gifUrl, image, privacy } = useSelector((state) => state.post);
@@ -29,8 +30,7 @@ const AddPost = ({ selectedImage }) => {
     feelings: '',
     gifUrl: '',
     profilePicture: '',
-    image: '',
-    video: ''
+    image: ''
   });
   const [disable, setDisable] = useState(true);
   const [apiResponse, setApiResponse] = useState('');
@@ -109,14 +109,7 @@ const AddPost = ({ selectedImage }) => {
         }
       }
     } catch (error) {
-      PostUtils.dispatchNotification(
-        error.response.data.message,
-        'error',
-        setApiResponse,
-        setLoading,
-        setDisable,
-        dispatch
-      );
+      PostUtils.dispatchNotification(error.response.data.message, 'error', setApiResponse, setLoading, dispatch);
     }
   };
 
