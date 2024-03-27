@@ -26,7 +26,7 @@ const Post = ({ post, showIcons }) => {
 
   const getFeeling = (name) => {
     const feeling = find(feelingsList, (data) => data.name === name);
-    return feeling?.name;
+    return feeling?.image;
   };
 
   const getPrivacy = (type) => {
