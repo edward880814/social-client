@@ -11,7 +11,7 @@ export const store = configureStore({
   reducer: {
     user: userReducer,
     suggestions: suggestionsReducer,
-    notification: notificationReducer,
+    notifications: notificationReducer,
     modal: modalReducer,
     post: postReducer,
     allPosts: postsReducer,

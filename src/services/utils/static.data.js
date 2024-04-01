@@ -8,7 +8,6 @@ import like from '@assets/reactions/like.png';
 import love from '@assets/reactions/love.png';
 import sad from '@assets/reactions/sad.png';
 import wow from '@assets/reactions/wow.png';
-
 import {
   FaBirthdayCake,
   FaComments,

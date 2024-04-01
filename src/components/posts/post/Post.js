@@ -65,7 +65,7 @@ const Post = ({ post, showIcons }) => {
       {reactionsModalIsOpen && <ReactionsModal />}
       {commentsModalIsOpen && <CommentsModal />}
       {showImageModal && (
-        <ImageModal image={`${imageUrl}`} onCancel={() => setShowImageModal(!showImageModal)} showArrow={true} />
+        <ImageModal image={`${imageUrl}`} onCancel={() => setShowImageModal(!showImageModal)} showArrow={false} />
       )}
       {deleteDialogIsOpen && (
         <Dialog

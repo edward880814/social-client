@@ -25,7 +25,7 @@ const Posts = ({ allPosts, userFollowing, postsLoading }) => {
         posts.length > 0 &&
         posts.map((post) => (
           <div key={Utils.generateString(10)} data-testid="posts-item">
-            {(!Utils.checkIfUserIsFollowed(profile?.blockedBy, post?.userId) || post?.userId === profile?._id) && (
+            {(!Utils.checkIfUserIsBlocked(profile?.blockedBy, post?.userId) || post?.userId === profile?._id) && (
               <>
                 {PostUtils.checkPrivacy(post, profile, following) && (
                   <>

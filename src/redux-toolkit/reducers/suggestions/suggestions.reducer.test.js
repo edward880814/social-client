@@ -1,4 +1,5 @@
 import reducer, { addToSuggestions } from '@redux/reducers/suggestions/suggestions.reducer';
+
 const initialState = {
   users: [],
   isLoading: false

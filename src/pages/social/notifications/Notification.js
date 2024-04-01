@@ -2,12 +2,14 @@ import { useState, useEffect } from 'react';
 import Avatar from '@components/avatar/Avatar';
 import '@pages/social/notifications/Notification.scss';
 import { FaCircle, FaRegCircle, FaRegTrashAlt } from 'react-icons/fa';
-import { notificationService } from '@services/api/notifications/notification.service';
 import { Utils } from '@services/utils/utils.service';
 import { useDispatch, useSelector } from 'react-redux';
+import { notificationService } from '@services/api/notifications/notification.service';
 import useEffectOnce from '@hooks/useEffectOnce';
 import { NotificationUtils } from '@services/utils/notification-utils.service';
 import NotificationPreview from '@components/dialog/NotificationPreview';
+import { timeAgo } from '@services/utils/timeago.utils';
+
 const Notification = () => {
   const { profile } = useSelector((state) => state.user);
   const [notifications, setNotifications] = useState([]);
@@ -117,7 +119,7 @@ const Notification = () => {
                         <small className="subtitle">
                           {!notification?.read ? <FaCircle className="icon" /> : <FaRegCircle className="icon" />}
                         </small>
-                        <p className="subtext">1 hr ago</p>
+                        <p className="subtext">{timeAgo.transform(notification?.createdAt)}</p>
                       </div>
                     </div>
                   </div>

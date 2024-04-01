@@ -2,11 +2,12 @@ import Input from '@components/input/Input';
 import { GiphyUtils } from '@services/utils/giphy-utils.service';
 import { useState, useEffect } from 'react';
 import { FaSearch } from 'react-icons/fa';
-import Spinner from '@components/spinner/Spinner';
+
 import '@components/giphy/Giphy.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { updatePostItem } from '@redux/reducers/post/post.reducer';
 import { toggleGifModal } from '@redux/reducers/modal/modal.reducer';
+import Spinner from '@components/spinner/Spinner';
 
 const Giphy = () => {
   const { gifModalIsOpen } = useSelector((state) => state.modal);
@@ -15,7 +16,7 @@ const Giphy = () => {
   const dispatch = useDispatch();
 
   const selectGif = (gif) => {
-    dispatch(updatePostItem({ gifUrl: gif, image: '', video: '' }));
+    dispatch(updatePostItem({ gifUrl: gif, image: '' }));
     dispatch(toggleGifModal(!gifModalIsOpen));
   };
 

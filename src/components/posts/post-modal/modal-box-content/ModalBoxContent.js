@@ -55,6 +55,7 @@ const ModalBoxContent = () => {
           className="time-text-display"
           onClick={() => setTogglePrivacy(!tooglePrivacy)}
         >
+          {selectedItem.icon}{' '}
           <div className="selected-item-text" data-testid="box-item-text">
             {selectedItem.topText}
           </div>
@@ -66,5 +67,4 @@ const ModalBoxContent = () => {
     </div>
   );
 };
-
 export default ModalBoxContent;
