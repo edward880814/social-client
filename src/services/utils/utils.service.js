@@ -132,6 +132,12 @@ export class Utils {
     return imageId && imageVersion ? this.appImageUrl(imageVersion, imageId) : '';
   }
 
+  static getVideo(videoId, videoVersion) {
+    return videoId && videoVersion
+      ? `https://res.cloudinary.com/dbymmegbb/video/upload/v${videoVersion}/${videoId}`
+      : '';
+  }
+
   static removeUserFromList(list, userId) {
     const index = findIndex(list, (id) => id === userId);
     list.splice(index, 1);

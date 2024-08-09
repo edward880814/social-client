@@ -8,6 +8,8 @@ import NotificationSkeleton from '@pages/social/notifications/NotificationSkelet
 import CardSkeleton from '@components/card-element/CardSkeleton';
 import PhotoSkeleton from '@pages/social/photos/PhotoSkeleton';
 import ProfileSkeleton from '@pages/social/profile/ProfileSkeleton';
+import ChatSkeleton from '@pages/social/chat/ChatSkeleton';
+import VideoSkeleton from '@pages/social/videos/VideoSkeleton';
 
 const Social = lazy(() => import('@pages/social/Social'));
 const Chat = lazy(() => import('@pages/social/chat/Chat'));
@@ -16,6 +18,7 @@ const Following = lazy(() => import('@pages/social/following/Following'));
 const Notification = lazy(() => import('@pages/social/notifications/Notification'));
 const People = lazy(() => import('@pages/social/people/People'));
 const Photos = lazy(() => import('@pages/social/photos/Photos'));
+const Videos = lazy(() => import('@pages/social/videos/Videos'));
 const Profile = lazy(() => import('@pages/social/profile/Profile'));
 const Streams = lazy(() => import('@pages/social/streams/Streams'));
 
@@ -52,7 +55,7 @@ export const AppRouter = () => {
         {
           path: 'chat/messages',
           element: (
-            <Suspense>
+            <Suspense fallback={<ChatSkeleton />}>
               <Chat />
             </Suspense>
           )
@@ -86,6 +89,14 @@ export const AppRouter = () => {
           element: (
             <Suspense fallback={<PhotoSkeleton />}>
               <Photos />
+            </Suspense>
+          )
+        },
+        {
+          path: 'videos',
+          element: (
+            <Suspense fallback={<VideoSkeleton />}>
+              <Videos />
             </Suspense>
           )
         },
