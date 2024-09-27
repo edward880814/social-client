@@ -1,7 +1,7 @@
 import { existingUser, userJwt } from '@mocks/data/user.mock';
 import { rest } from 'msw';
-
-const BASE_URL = `${process.env.REACT_APP_BASE_ENDPOINT}/api/v1`;
+import { BASE_ENDPOINT } from '@services/axios';
+const BASE_URL = `${BASE_ENDPOINT}/api/v1`;
 
 export const signInMock = rest.post(`${BASE_URL}/signin`, (req, res, ctx) => {
   const result = { message: 'User login successfully', user: existingUser, token: userJwt };

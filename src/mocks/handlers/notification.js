@@ -1,7 +1,7 @@
 import { notificationData } from '@mocks/data/notification.mock';
 import { rest } from 'msw';
-
-const BASE_URL = `${process.env.REACT_APP_BASE_ENDPOINT}/api/v1`;
+import { BASE_ENDPOINT } from '@services/axios';
+const BASE_URL = `${BASE_ENDPOINT}/api/v1`;
 
 export const emptyNotificationsMock = rest.get(`${BASE_URL}/notifications`, (req, res, ctx) => {
   const result = { message: 'User notifications', notifications: [] };
