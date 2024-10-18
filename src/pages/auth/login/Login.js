@@ -19,6 +19,7 @@ const Login = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [alertType, setAlertType] = useState('');
   const [user, setUser] = useState();
+  const [setToken] = useLocalStorage('token', 'set');
   const [setStoredUsername] = useLocalStorage('username', 'set');
   const [setLoggedIn] = useLocalStorage('keepLoggedIn', 'set');
   const [pageReload] = useSessionStorage('pageReload', 'set');
@@ -35,6 +36,7 @@ const Login = () => {
       });
       setLoggedIn(keepLoggedIn);
       setStoredUsername(username);
+      setToken(result.data.token);
       setHasError(false);
       setAlertType('alert-success');
       Utils.dispatchUser(result, pageReload, dispatch, setUser);
