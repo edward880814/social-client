@@ -34,7 +34,7 @@
     "lint:fix": "eslint \"src/**/*.js\" --fix",
     "prettier:check": "prettier --check \"src/**/*.{js,jsx,json}\"",
     "prettier:fix": "prettier --write \"src/**/*.{js,jsx,json}\"",
-    "build": "react-app-rewired build",
+    "build": "cross-env CI=false react-app-rewired build",
     "test": "react-app-rewired test --coverage --forceExit --detectOpenHandles --watchAll=false"
   },
   "eslintConfig": {
@@ -56,6 +56,7 @@
     ]
   },
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "eslint": "^8.49.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-config-standard": "^17.1.0",
