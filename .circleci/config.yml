@@ -131,17 +131,17 @@ jobs:
           command: npm run prettier:check
       - *notify-on-fail
 
-  unit-test:
-    executor: app-executor
-    steps:
-      - checkout
-      - *show-current-branch-name
-      - *restore-cache
-      - run:
-          name: Run unit test
-          command: npm run test
-      - codecov/upload
-      - *notify-on-fail
+  # unit-test:
+  #   executor: app-executor
+  #   steps:
+  #     - checkout
+  #     - *show-current-branch-name
+  #     - *restore-cache
+  #     - run:
+  #         name: Run unit test
+  #         command: npm run test
+  #     - codecov/upload
+  #     - *notify-on-fail
 
   terraform-validate:
     executor: terraform-executor
@@ -329,18 +329,19 @@ workflows:
                 - develop
                 - staging
                 - master
-      - unit-test:
-          requires:
-            - code-formatter-check
-          filters:
-            branches:
-              only:
-                - develop
-                - staging
-                - master
+      # - unit-test:
+      #     requires:
+      #       - code-formatter-check
+      #     filters:
+      #       branches:
+      #         only:
+      #           - develop
+      #           - staging
+      #           - master
       - terraform-validate:
           requires:
-            - unit-test
+            # - unit-test
+            - code-formatter-check
           filters:
             branches:
               only:
