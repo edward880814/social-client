@@ -205,7 +205,7 @@ jobs:
             npm run build
             echo "Build successful"
             # For the bucket name here, use the variable prefix inside your variables.tf file
-            aws --region us-east-1 s3 cp build s3://chatapp-client-${CIRCLE_BRANCH}-app --recursive
+            aws --region us-east-1 s3 cp build s3://chatapp-client-${CIRCLE_BRANCH}-edward-project-app --recursive
       - *notify-on-fail
 
   aws-cloudfront-distribution:
