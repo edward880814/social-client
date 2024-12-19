@@ -187,7 +187,7 @@ jobs:
     steps:
       - checkout
       - aws-cli/setup:
-          profile-name: default
+          profile_name: default
       - *restore-cache
       - run:
           name: Upload build to S3
@@ -215,7 +215,7 @@ jobs:
       - attach_workspace:
           at: ./
       - aws-cli/setup:
-          profile-name: default
+          profile_name: default
       - run:
           name: Invalidate cloudfront distribution
           command: |
