@@ -239,7 +239,7 @@ jobs:
                   "type": "header",
                   "text": {
                     "type": "plain_text",
-                    "text": "✅ 👍 ✅ ${CIRCLE_BRANCH} branch backend deployment is complete. ✅ 👍 ✅",
+                    "text": "✅ 👍 ✅ ${CIRCLE_BRANCH} branch client deployment is complete. ✅ 👍 ✅",
                     "emoji": true
                   }
                 },
@@ -293,6 +293,10 @@ jobs:
     steps:
       - checkout
       - *show-current-branch-name
+      - run:
+          name: Install curl
+          command: |
+            apk add --no-cache curl
       - run:
           name: Terraform destroy
           command: |
